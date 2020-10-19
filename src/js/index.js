@@ -1,26 +1,24 @@
 import '../styles/main.scss';
 
-const flipCards = document.querySelectorAll('.flipcard-front');
-console.log(flipCards)
+const frontCards = document.querySelectorAll('.flipcard-front');
+const backCards = document.querySelectorAll('.flipcard-back');
 
-flipCards.forEach(element => {
-  console.log(element)
-});
-
-fetch(`https://api.unsplash.com/photos/random?count=${flipCards.length}&client_id=zniu4K8oGgiANYwLy20uLMtdphNxjUpHAbnWT26F96s`)
+fetch(`https://api.unsplash.com/photos/random?count=${frontCards.length}&client_id=zniu4K8oGgiANYwLy20uLMtdphNxjUpHAbnWT26F96s`)
 .then(response => response.json())
-.then(parsed => {
-  const urls = parsed.map(el => el.urls.small);
-  flipCards.forEach((card, i) => {
+.then(imageJSON => {
+  // const urls = parsed.map(el => el.urls.small);
+
+
+  for(let i = 0; i < frontCards.length; i++){
     const imageElement = document.createElement('img');
-    imageElement.src = urls[i];
+    imageElement.src = imageJSON[i].urls.small;
     imageElement.style.width = '100%';
     imageElement.style.height = '100%';
     imageElement.style.objectFit = 'cover';
+    frontCards[i].append(imageElement)
 
-
-    card.append(imageElement)
-  })
+    backCards[i].innerHTML = `${imageJSON[i].user.name}<br>${imageJSON[i].user.bio}`
+  }
 })
 
 
