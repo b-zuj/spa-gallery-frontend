@@ -1,14 +1,10 @@
-const webpack = require('webpack')
+// const webpack = require('webpack')
+const path = require('path');
 
 module.exports =  {
-  /* ... */
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
   },
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-}
+};
