@@ -4,7 +4,6 @@ export default (data, container) => {
     containerElement.innerHTML = '';
   }
 
-  // comment
   let html = '';
   data.forEach(picture => {
     const article = document.createElement('article');
