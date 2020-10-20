@@ -30,5 +30,5 @@ export const htmlBuilder = (data, container) => {
     html += article.outerHTML
   })
   container.innerHTML = html
-  return html
+  return html;
 }
