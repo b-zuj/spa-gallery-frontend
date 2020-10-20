@@ -20,7 +20,6 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env.ACCESS_KEY": JSON.stringify("TduXFqg5AQzljFLF3zp-MiNvAzj4Bp9eaY_lQUUC0xY"),
-      "process.env.SECRET_KEY": JSON.stringify("2YoyDnm02bL-hYutXOcqAcrK727mtf_SEs_XGT8EpNw")
     })
   ],
   module: {

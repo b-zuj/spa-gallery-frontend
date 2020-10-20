@@ -1,10 +1,10 @@
-const main = document.querySelector('#main')
 
 
-export const htmlBuilder = (data) => {
-  if (main.innerHTML !== "") {
-    main.innerHTML = ""
+export const htmlBuilder = (data, container) => {
+  if (container.innerHTML !== "") {
+    container.innerHTML = ""
   }
+  let html = ''
   data.forEach(picture => {
     const article = document.createElement('article')
     article.classList.add('card')
@@ -27,6 +27,8 @@ export const htmlBuilder = (data) => {
     innerCard.appendChild(cardFront)
     innerCard.appendChild(cardBack)
     article.appendChild(innerCard)
-    main.appendChild(article)
+    html += article.outerHTML
   })
+  container.innerHTML = html
+  return html
 }
