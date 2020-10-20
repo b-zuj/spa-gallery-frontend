@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
+
 body {
   position: relative;
   min-height: 100vh;
   padding-bottom: 80px;
 }
+
 nav {
   position: fixed;
   z-index: 100;
@@ -18,11 +23,28 @@ nav {
 }
 
 form {
+  display: flex;
   text-align: center;
+  align-items: flex-start;
+  justify-content: center;
   margin: 0 auto;
   padding-top: 80px;
   input {
-    padding: 5px;
+    padding: 3px;
+    width: 300px;
+    max-width: 300px;
+    &[type=submit] {
+      width: auto;
+      padding: 5px 15px;
+      color: white;
+      background-color: cadetblue;
+      border-radius: 3px;
+      cursor: pointer;
+      border: none
+    }
+  }
+  button {
+    margin-left: 5px;
   }
 }
 
@@ -36,14 +58,16 @@ main {
   max-width: 1000px;
   
   article {
-    position: relative;
     margin: 10px;
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 300px;
+    border-radius: 4px;
+    overflow: hidden;
      
     .flipcard-inner {
       position: relative;
       width: 100%;
+      border-radius: 4px;
       height: 100%;
       transition: transform 0.8s;
       transform-style: preserve-3d;
@@ -51,17 +75,28 @@ main {
       div {
         position: absolute;
         width: 100%;
+        border-radius: 4px;
         height: 100%;
         backface-visibility: hidden;
       }
       .flipcard-front {
-        background-color: #bbb;
-        color: black
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
       }
       .flipcard-back {
-        background-color: #bbb;
-        color: black;
+        background-color: black;
         transform: rotateY(180deg);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p {
+          font-size: 1.4em;
+          color: white;
+          text-transform: capitalize;
+          text-align: center;
+        }
       }
     }
 
@@ -89,10 +124,26 @@ button {
   color: white;
   background-color: cadetblue;
   border-radius: 3px;
+  cursor: pointer;
   border: none
 }
 
 .btn-container {
-  width: auto;
+ display: flex;
+ justify-content: center;
+ button {
+  margin: 20px;
+ }
+}
+
+#searchautocomplete-list {
+  max-width: 300px;
   margin: 0 auto;
+  background-color: #eee;
+  width: auto;
+  border: 1px solid;
+  div {
+    padding: 4px;
+    cursor: pointer;
+  }
 }

@@ -1,67 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>Gallery</title>
 </head>
+
 <body>
   <nav>
     <img class="logo" src="/assets/infinity.png" alt="Logo">
   </nav>
-  <form action="search" autocomplete="on">
-    <input type="text" placeholder="search">
-    <button type="submit">Search</button>
-  </form>
-  <main>
-
-    <article class="card">
-      <div class="flipcard-inner">
-        <div class="flipcard-front">
-          <!-- <img src="" alt=""> -->
-        </div>
-        <div class="flipcard-back">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In magnam quibusdam, et eos laboriosam cumque facere earum dolor omnis velit corporis.</p>
-        </div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="flipcard-inner">
-        <div class="flipcard-front">
-          <!-- <img src="" alt=""> -->
-        </div>
-        <div class="flipcard-back">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In magnam quibusdam, et eos laboriosam cumque facere earum dolor omnis velit corporis.</p>
-        </div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="flipcard-inner">
-        <div class="flipcard-front">
-          <!-- <img src="" alt=""> -->
-        </div>
-        <div class="flipcard-back">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In magnam quibusdam, et eos laboriosam cumque facere earum dolor omnis velit corporis.</p>
-        </div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="flipcard-inner">
-        <div class="flipcard-front">
-          <!-- <img src="" alt=""> -->
-        </div>
-        <div class="flipcard-back">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In magnam quibusdam, et eos laboriosam cumque facere earum dolor omnis velit corporis.</p>
-        </div>
-      </div>
-    </article>
-    </main>
-    <div class="btn-container">
-      <button>prev</button>
-      <button>next</button>
+  <form autocomplete="off" id="form">
+    <div>
+      <input id="search" type="text" placeholder="search">
     </div>
+    <input id="submit" type="submit" value="Search">
+  </form>
+  <div class="btn-container">
+    <button class="navBtn">prev</button>
+    <button class="navBtn">next</button>
+  </div>
+  <main id="main">
+
+  </main>
+
   <footer>
     <img class="logo" src="/assets/github-logo.png" alt="Github logo">
   </footer>
 </body>
+
 </html>
