@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports =  {
+module.exports = {
   mode: 'development',
   devServer: {
     historyApiFallback: true,

@@ -6,3 +6,4 @@ webpack.config.js
 **/*.e2e.js
 /postcss.config.js
 /dist/*
+/src/js/autocomplete.js

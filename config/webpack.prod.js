@@ -1,7 +1,7 @@
 // const webpack = require('webpack')
 const path = require('path');
 
-module.exports =  {
+module.exports = {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, '../dist'),

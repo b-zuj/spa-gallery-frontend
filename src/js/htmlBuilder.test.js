@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { htmlBuilder } from './htmlBuilder'
+import htmlBuilder from './htmlBuilder';
 
 const html = new JSDOM(`
 <!DOCTYPE html>
@@ -15,18 +15,18 @@ const html = new JSDOM(`
   </main>
 </body>
 </html>
-`)
+`);
 
-const mainContainer = html.window.document.querySelector("#main")
+const mainContainer = html.window.document.querySelector('#main');
 
 const data = [
   {
-    alt_description: "silver tabby kitten on floor",
+    alt_description: 'silver tabby kitten on floor',
     urls: {
-      small: "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE3NTg0M30",
+      small: 'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE3NTg0M30',
     },
   },
-]
+];
 
 test('Should return article element', () => {
   mainContainer.innerHTML = `
@@ -39,7 +39,7 @@ test('Should return article element', () => {
       </div>
     </div>
   </article>
-  `
+  `;
 
   expect(htmlBuilder(data, mainContainer)).toBe(mainContainer.innerHTML);
 });
