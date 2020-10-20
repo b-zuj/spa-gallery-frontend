@@ -3,6 +3,8 @@ export default (data, container) => {
   if (containerElement.innerHTML !== '') {
     containerElement.innerHTML = '';
   }
+
+  // comment
   let html = '';
   data.forEach(picture => {
     const article = document.createElement('article');
