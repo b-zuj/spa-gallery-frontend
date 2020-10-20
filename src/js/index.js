@@ -13,7 +13,7 @@ let page = 1;
 
 const fetcher = (query, page) => {
   const pagination = page ? `&page=${page}` : ""
-  console.log(`https://api.unsplash.com/search/photos/?query=${query}&client_id=${key}&per_page=10${pagination}`)
+  // console.log(`https://api.unsplash.com/search/photos/?query=${query}&client_id=${key}&per_page=10${pagination}`)
   fetch(`https://api.unsplash.com/search/photos/?query=${query}&client_id=${key}&per_page=10${pagination}`)
     .then(res => res.json())
     .then(data => {
@@ -33,6 +33,7 @@ const handleStorage = (query) => {
 }
 
 const search = (e, page) => {
+
   if (e) {
     e.preventDefault();
   }
@@ -61,5 +62,6 @@ navBtns.forEach(btn => {
 })
 
 
-
-autocomplete(searchInput, searchArr)
+searchInput.addEventListener('focus', () => {
+  autocomplete(searchInput, searchArr)
+})
