@@ -2,14 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-const extractPlugin = new ExtractTextPlugin({
-  filename: 'main.css'
-})
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/js/index.js"],
+  entry: ['@babel/polyfill', './src/js/index.js'],
 
   plugins: [
     new HtmlWebpackPlugin({
