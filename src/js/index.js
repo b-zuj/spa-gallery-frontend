@@ -8,6 +8,7 @@ import {
 import { inputChangeHandler, createSuggestionsList, handleStorage } from './search';
 import htmlBuilder from './htmlBuilder';
 
+const baseUrl = 'https://salt-spa-gallery.herokuapp.com/api/unsplash';
 let query = '';
 let page = 1;
 
@@ -27,7 +28,7 @@ const loader = '<div class="loader">Loading...</div>';
 const fetcher = async (queryString, pageNumber) => {
   spinnerContainer.innerHTML = loader;
   const pagination = pageNumber ? `&page=${pageNumber}` : '';
-  const data = await axios.get(`https://api.unsplash.com/search/photos/?query=${queryString}&client_id=${process.env.ACCESS_KEY}&per_page=10${pagination}`);
+  const data = await axios.get(`${baseUrl}?query=${queryString}&per_page=10${pagination}`);
   spinnerContainer.innerHTML = '';
   if (data.data.results.length < 1) {
     return cleanerFailure();
