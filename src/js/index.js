@@ -4,12 +4,19 @@ import '../styles/styles.scss';
 import {
   searchInput, form, paginationBtns, main, ul, pageCounter, spinnerContainer,
 } from './selectors';
-import { inputChangeHandler, createSuggestionsList, handleStorage } from './search';
+import { inputChangeHandler, createSuggestionsList } from './search';
 import htmlBuilder from './htmlBuilder';
-
+// const devUrl = 'http://localhost:5000/api/unsplash'
 const baseUrl = 'https://salt-spa-gallery.herokuapp.com/api/unsplash';
+
 let query = '';
 let page = 1;
+
+// initial load of localStorage values for search
+const localStorageSearch = localStorage.getItem('search');
+let searchArr = localStorageSearch ? localStorageSearch.split(',') : [];
+
+const loader = '<div class="loader">Loading...</div>';
 
 const cleanerFailure = () => {
   spinnerContainer.innerHTML = `<p class="error">No images for: <strong>${query}</strong></</p>`;
@@ -22,7 +29,13 @@ const cleanerFailure = () => {
   searchInput.value = '';
 };
 
-const loader = '<div class="loader">Loading...</div>';
+const handleStorage = queryString => {
+  searchArr.push(queryString);
+  searchArr = [...new Set(searchArr)];
+  searchArr = searchArr.filter(item => item.trim().length > 0);
+  searchInput.value = '';
+  localStorage.setItem('search', searchArr);
+};
 
 const fetcher = async (queryString, pageNumber) => {
   spinnerContainer.innerHTML = loader;
@@ -39,10 +52,6 @@ const pageCounterHandler = (pageNumber, el) => {
   el.textContent = pageNumber;
 };
 
-// initial load of localStorage values for search
-const localStorageSearch = localStorage.getItem('search');
-const searchArr = localStorageSearch ? localStorageSearch.split(',') : [];
-
 // build cards and clean localStorage
 const searchAndDisplay = async (e, pageNumber) => {
   if (e) {
@@ -52,21 +61,24 @@ const searchAndDisplay = async (e, pageNumber) => {
   try {
     const data = await fetcher(query, pageNumber);
     htmlBuilder(data.data.results, main);
+    handleStorage(query);
     paginationBtns.forEach(btn => {
       btn.style.display = 'block';
     });
     pageCounter.style.display = 'block';
+    return null;
   } catch (error) {
-    cleanerFailure();
+    return cleanerFailure();
   }
 };
 
 // form listener
 form.addEventListener('submit', e => {
   searchAndDisplay(e);
-  handleStorage(query, searchArr);
   pageCounterHandler(page, pageCounter);
   page = 1;
+  pageCounter.textContent = 1;
+  paginationBtns[0].setAttribute('disabled', 'true');
 });
 
 // Pagination
