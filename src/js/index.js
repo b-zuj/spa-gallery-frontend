@@ -14,8 +14,8 @@ let query = '';
 let page = 1;
 
 // initial load of localStorage values for search
-const localStorageSearch = localStorage.getItem('search');
-let searchArr = localStorageSearch ? localStorageSearch.split(',') : [];
+const localStorageSearch = JSON.parse(localStorage.getItem('search'));
+let searchArr = localStorageSearch || [];
 
 const loader = '<div class="loader">Loading...</div>';
 
@@ -32,11 +32,11 @@ const cleanerFailure = () => {
 };
 
 const handleStorage = queryString => {
-  searchArr.push(queryString.toLowerCase());
+  searchArr.unshift(queryString.toLowerCase());
   searchArr = [...new Set(searchArr)];
   searchArr = searchArr.filter(item => item.trim().length > 0);
   searchInput.value = '';
-  localStorage.setItem('search', searchArr);
+  localStorage.setItem('search', JSON.stringify(searchArr));
 };
 
 const fetcher = async (queryString, pageNumber) => {
@@ -81,6 +81,7 @@ form.addEventListener('submit', e => {
   page = 1;
   pageCounter.textContent = 1;
   paginationBtns[0].setAttribute('disabled', 'true');
+  ul.innerHTML = '';
 });
 
 // Pagination
