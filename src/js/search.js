@@ -28,10 +28,9 @@ export const inputChangeHandler = (searchArr, e) => {
 };
 
 export const handleStorage = (queryString, searchArr) => {
-  let newSearchArr = searchArr.slice();
-  newSearchArr.push(queryString);
-  newSearchArr = [...new Set(searchArr)];
-  newSearchArr = newSearchArr.filter(item => item.trim().length > 0);
+  searchArr.push(queryString);
+  searchArr = [...new Set(searchArr)];
+  searchArr = searchArr.filter(item => item.trim().length > 0);
   searchInput.value = '';
-  localStorage.setItem('search', newSearchArr);
+  localStorage.setItem('search', searchArr);
 };

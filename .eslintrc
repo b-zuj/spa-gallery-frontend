@@ -2,5 +2,6 @@
   "extends": "salt",
   "rules": {
     // Overrides here
+    "no-param-reassign": 0
   }
 }
