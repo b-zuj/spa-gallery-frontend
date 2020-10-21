@@ -1,0 +1,54 @@
+form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 80px;
+  width: 100%;
+  .searchContainer {
+    position: relative;
+    width: 66%;
+    max-width: 300px;
+  }
+  input {
+    padding: 3px;
+    width: 100%;
+    max-width: 300px;
+    border: 2px solid cadetblue;
+    border-radius: 3px;
+    outline: none;
+    transition: .2s;
+    overflow: hidden;
+    &:focus {
+      border-color: rgb(31, 205, 211);
+    }
+    &[type=submit] {
+      width: auto;
+      padding: 5px 15px;
+      color: white;
+      background-color: cadetblue;
+      border-radius: 3px;
+      cursor: pointer;
+      border: none
+    }
+  }
+  button {
+    margin-left: 5px;
+  }
+ 
+  ul {
+    position: absolute;
+    max-height: 200px;
+    width: 100%;
+    border-radius: 3px;
+    overflow: scroll;
+    z-index: 200;
+  }
+  li {
+    color: white;
+    padding: 5px;
+    background-color: #222;
+    list-style: none;
+    cursor: pointer;
+  }
+}

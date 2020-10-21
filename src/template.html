@@ -12,21 +12,24 @@
     <img class="logo" src="/assets/infinity.png" alt="Logo">
   </nav>
   <form autocomplete="off" id="form">
-    <div>
+    <div class="searchContainer">
       <input id="search" type="text" placeholder="search">
+      <ul id="suggests"></ul>
     </div>
     <input id="submit" type="submit" value="Search">
   </form>
   <div class="btn-container">
-    <button class="navBtn">prev</button>
-    <button class="navBtn">next</button>
+    <button class="paginationBtn" disabled>prev</button>
+    <span id="pageCounter"></span>
+    <button class="paginationBtn">next</button>
   </div>
+  <div class="spinner"></div>
   <main id="main">
 
   </main>
 
   <footer>
-    <img class="logo" src="/assets/github-logo.png" alt="Github logo">
+    <a href="https://github.com/" target="_blank"><img class="logo" src="/assets/github-logo.png" alt="Github logo"></a>
   </footer>
 </body>
 

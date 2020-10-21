@@ -1,63 +1,98 @@
-import '../styles/main.scss';
-import { autocomplete } from './autocomplete';
+import axios from 'axios'
+
+import '../styles/styles.scss';
+import { searchInput, form, paginationBtns, main, ul, pageCounter, spinnerContainer } from './selectors'
+import { inputChangeHandler, createSuggestionsList, handleStorage } from './search';
 import htmlBuilder from './htmlBuilder';
-
-const key = process.env.ACCESS_KEY; // key to api
-
-const searchInput = document.querySelector('#search');
-const form = document.querySelector('#form');
-const navBtns = document.querySelectorAll('.navBtn');
-const main = document.querySelector('#main');
 
 let query = '';
 let page = 1;
 
-const fetcher = (queryString, pageNumber) => {
+const loader = `<div class="loader">Loading...</div>`
+
+const fetcher = async (queryString, pageNumber) => {
+  spinnerContainer.innerHTML = loader;
   const pagination = pageNumber ? `&page=${pageNumber}` : '';
-  fetch(`https://api.unsplash.com/search/photos/?query=${queryString}&client_id=${key}&per_page=10${pagination}`)
-    .then(res => res.json())
-    .then(data => {
-      htmlBuilder(data.results, main);
-    });
+  const data = await axios.get(`https://api.unsplash.com/search/photos/?query=${queryString}&client_id=${process.env.ACCESS_KEY}&per_page=10${pagination}`)
+  spinnerContainer.innerHTML = ''
+  return data
 };
 
+const pageCounterHandler = (page, el) => {
+  el.textContent = page
+}
+// initial load of localStorage values for search
 const localStorageSearch = localStorage.getItem('search');
 let searchArr = localStorageSearch ? localStorageSearch.split(',') : [];
 
-const handleStorage = queryString => {
-  searchArr.push(queryString);
-  searchArr = [...new Set(searchArr)];
-  searchInput.value = '';
-  localStorage.setItem('search', searchArr);
-};
-
-const search = (e, pageNumber) => {
+// build cards and clean localStorage
+const searchAndDisplay = async (e, pageNumber) => {
   if (e) {
     e.preventDefault();
   }
   query = searchInput.value ? searchInput.value : query;
-  fetcher(query, pageNumber);
-  handleStorage(query);
+  try {
+    const data = await fetcher(query, pageNumber);
+    htmlBuilder(data.data.results, main);
+    handleStorage(query, searchArr);
+    paginationBtns.forEach(btn => {
+      btn.style.display = 'block'
+    })
+    pageCounter.style.display = 'block'
+  } catch (error) {
+    spinnerContainer.innerHTML = `<p class="error">No images for: <strong>${query}</strong></p>`
+    main.innerHTML = ''
+    paginationBtns.forEach(btn => {
+      btn.style.display = 'none'
+    })
+    pageCounter.style.display = 'none'
+    page = 1
+    searchInput.value = ''
+  }
 };
 
+// form listener
 form.addEventListener('submit', e => {
-  search(e);
+  searchAndDisplay(e);
+  pageCounterHandler(page, pageCounter)
 });
 
 // Pagination
-navBtns.forEach(btn => {
+paginationBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.textContent === 'prev' && page > 1) {
-      search(null, page - 1);
+      searchAndDisplay(null, page - 1);
       page -= 1;
+      pageCounterHandler(page, pageCounter)
+
+    }
+
+    if (btn.textContent === 'prev' && page === 1) {
+      btn.setAttribute('disabled', 'true')
+
     }
     if (btn.textContent === 'next') {
-      search(null, page + 1);
+      searchAndDisplay(null, page + 1);
       page += 1;
+      paginationBtns[0].removeAttribute('disabled')
+      pageCounterHandler(page, pageCounter)
     }
   });
 });
+console.log(paginationBtns)
 
-searchInput.addEventListener('focus', () => {
-  autocomplete(searchInput, searchArr);
+//listeners  for Input
+searchInput.addEventListener('focusin', () => {
+  createSuggestionsList(searchArr)
 });
+
+// clean search suggests on focusout
+window.addEventListener('click', (e) => {
+  if (e.target.tagName !== "INPUT" && e.target.tagName !== "FORM" && e.target.tagName !== "UL" && e.target.tagName !== "LI") {
+    ul.innerHTML = ''
+  }
+});
+
+searchInput.addEventListener('input', (e) => {
+  inputChangeHandler(searchArr, e)
+})
