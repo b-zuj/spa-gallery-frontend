@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: cadetblue;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.logo {
+  display: block;
+  padding: 8px 0;
+  margin: 0 auto;
+  height: 70px;
+  width: auto;
+}
+button {
+  padding: 5px 15px;
+  color: white;
+  background-color: cadetblue;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none
+}
+
+
+
+#searchautocomplete-list {
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #eee;
+  width: auto;
+  border: 1px solid;
+  div {
+    border-bottom: 1px solid black;
+    padding: 4px;
+    cursor: pointer;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+   margin: 20px;
+  }
+ }
+
+.paginationBtn {
+  display: none;
+ &:disabled {
+   background-color: rgb(145, 168, 168);
+ }
+}
+
+#pageCounter {
+  position: relative;
+  display: none;
+  color: white;
+  line-height: 30px;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: cadetblue;
+}
+
+.error {
+  margin: 20px;
+  text-align: center;
+  color: cadetblue;
+  font-size: 1.5em;
+}

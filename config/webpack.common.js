@@ -4,9 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: {
-    main: path.resolve(__dirname, '../src/js/index.js'),
-  },
+  entry: ['@babel/polyfill', './src/js/index.js'],
+
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Gallery',
@@ -35,6 +34,7 @@ module.exports = {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
+      // HTML
       {
         test: /\.html$/i,
         loader: 'html-loader',
