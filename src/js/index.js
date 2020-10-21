@@ -6,7 +6,8 @@ import {
 } from './selectors';
 import { inputChangeHandler, createSuggestionsList } from './search';
 import htmlBuilder from './htmlBuilder';
-const devUrl = 'http://localhost:5000/api/unsplash'
+
+// const devUrl = 'http://localhost:5000/api/unsplash';
 const baseUrl = 'https://salt-spa-gallery.herokuapp.com/api/unsplash';
 
 let query = '';
