@@ -1,4 +1,3 @@
-/* eslint no-param-reassign: "error" */
 import axios from 'axios';
 
 import '../styles/styles.scss';
@@ -53,7 +52,6 @@ const searchAndDisplay = async (e, pageNumber) => {
   try {
     const data = await fetcher(query, pageNumber);
     htmlBuilder(data.data.results, main);
-    handleStorage(query, searchArr);
     paginationBtns.forEach(btn => {
       btn.style.display = 'block';
     });
@@ -66,7 +64,9 @@ const searchAndDisplay = async (e, pageNumber) => {
 // form listener
 form.addEventListener('submit', e => {
   searchAndDisplay(e);
+  handleStorage(query, searchArr);
   pageCounterHandler(page, pageCounter);
+  page = 1;
 });
 
 // Pagination
