@@ -103,3 +103,25 @@ button {
   color: cadetblue;
   font-size: 1.5em;
 }
+.success {
+  position: relative;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  width: 40%;
+  max-width: 500px;
+  color: cadetblue;
+  font-size: 2em;
+  border: 1px solid;
+  border-radius: 5px;
+  transition: 0.3s;
+  &::after {
+    position: absolute;
+    content: "Search result";
+    font-size: 0.4em;
+    padding: 0 5px;
+    background-color: white;
+    top: -10px;
+    left: 20px;
+  }
+}

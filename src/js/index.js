@@ -6,7 +6,7 @@ import {
 } from './selectors';
 import { inputChangeHandler, createSuggestionsList } from './search';
 import htmlBuilder from './htmlBuilder';
-// const devUrl = 'http://localhost:5000/api/unsplash'
+const devUrl = 'http://localhost:5000/api/unsplash'
 const baseUrl = 'https://salt-spa-gallery.herokuapp.com/api/unsplash';
 
 let query = '';
@@ -19,7 +19,8 @@ let searchArr = localStorageSearch ? localStorageSearch.split(',') : [];
 const loader = '<div class="loader">Loading...</div>';
 
 const cleanerFailure = () => {
-  spinnerContainer.innerHTML = `<p class="error">No images for: <strong>${query}</strong></</p>`;
+  spinnerContainer.innerHTML = `<p class="error">No images for: <strong>${query}</strong></</p>
+  <p class="error">and we are limited to only 50request per hour...</</p>`;
   main.innerHTML = '';
   paginationBtns.forEach(btn => {
     btn.style.display = 'none';
@@ -30,7 +31,7 @@ const cleanerFailure = () => {
 };
 
 const handleStorage = queryString => {
-  searchArr.push(queryString);
+  searchArr.push(queryString.toLowerCase());
   searchArr = [...new Set(searchArr)];
   searchArr = searchArr.filter(item => item.trim().length > 0);
   searchInput.value = '';
@@ -41,7 +42,7 @@ const fetcher = async (queryString, pageNumber) => {
   spinnerContainer.innerHTML = loader;
   const pagination = pageNumber ? `&page=${pageNumber}` : '';
   const data = await axios.get(`${baseUrl}?query=${queryString}&per_page=10${pagination}`);
-  spinnerContainer.innerHTML = '';
+  spinnerContainer.innerHTML = `<p class="success">${query}</</p>`;
   if (data.data.results.length < 1) {
     return cleanerFailure();
   }
