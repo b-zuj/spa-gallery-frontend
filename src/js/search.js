@@ -26,11 +26,3 @@ export const inputChangeHandler = (searchArr, e) => {
   }).filter(item => item);
   createSuggestionsList(result);
 };
-
-export const handleStorage = (queryString, searchArr) => {
-  searchArr.push(queryString);
-  searchArr = [...new Set(searchArr)];
-  searchArr = searchArr.filter(item => item.trim().length > 0);
-  searchInput.value = '';
-  localStorage.setItem('search', searchArr);
-};
