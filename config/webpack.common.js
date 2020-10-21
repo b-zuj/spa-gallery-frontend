@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -16,9 +15,6 @@ module.exports = {
       patterns: [
         { from: 'assets', to: 'assets' },
       ],
-    }),
-    new webpack.DefinePlugin({
-      'process.env.ACCESS_KEY': JSON.stringify('TduXFqg5AQzljFLF3zp-MiNvAzj4Bp9eaY_lQUUC0xY'),
     }),
   ],
   module: {
