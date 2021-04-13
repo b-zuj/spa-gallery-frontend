@@ -10,7 +10,7 @@ It is a learning-by-doing project.
 
 ## Tech/framework used
 <b>This project uses</b>
-- vanila JavaScript + Axios
+- vanilla JavaScript + Axios
 - [webpack](https://webpack.js.org/) for deployment
 
 ## API Reference
